@@ -8,6 +8,7 @@ export const ProductCard = ({ product }) => {
         <p>Price: {product.price}</p>
         <p>Type: {product.type}</p>
         {product.size > 0 ?? <p>Size: {product.size}</p>}
+        test
       </div>
     </li>
   );
