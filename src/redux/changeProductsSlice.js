@@ -1,5 +1,5 @@
-import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { getAllProducts } from './operations';
+import { createSlice, isAnyOf } from "@reduxjs/toolkit";
+import { deleteSelected, getAllProducts } from "./operations";
 // import {
 //   toastAddTransactionError,
 //   toastAddTransactionSuccess,
@@ -16,6 +16,7 @@ import { getAllProducts } from './operations';
 
 const initialState = {
   products: [],
+  selected: [],
 };
 
 // const options = [getCategories, createTransaction, getTransactions];
@@ -31,13 +32,21 @@ const initialState = {
 // };
 
 const changeProductsSlice = createSlice({
-  name: 'changeProducts',
+  name: "changeProducts",
   initialState,
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
-        .addCase(getAllProducts.fulfilled, (state, { payload }) => {
-            console.log(payload);
-        state.products = payload })    
+      .addCase(getAllProducts.fulfilled, (state, { payload }) => {
+        // console.log(payload);
+        state.products = payload;
+      })
+      .addCase(deleteSelected.fulfilled, (state, { payload }) => {
+        if (!payload.length) return;
+        state.products = state.products.filter(product => ! payload.includes(product.sku))
+
+        // console.log(payload);
+        
+      });
     //   .addCase(createTransaction.fulfilled, (state, { payload }) => {
     //     toastAddTransactionSuccess('Success adding transaction!');
     //     state.totalBalance = payload.balanceAfter;
@@ -58,11 +67,11 @@ const changeProductsSlice = createSlice({
     //   .addMatcher(isAnyOf(...getOption('pending')), handlePending)
     //   .addMatcher(isAnyOf(...getOption('rejected')), handleRejected);
   },
-//   reducers: {
-//     setBalance: (state, { payload }) => {
-//       state.totalBalance = payload;
-//     },
-//   },
+  //   reducers: {
+  //     setBalance: (state, { payload }) => {
+  //       state.totalBalance = payload;
+  //     },
+  //   },
 });
 
 export const changeProductsReducer = changeProductsSlice.reducer;
