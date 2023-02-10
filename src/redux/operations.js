@@ -1,13 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { selectSelected } from "./selectors";
 
-async function getProducts(_, thunkAPI) { 
-    // console.log("server!");
+async function getProducts(_, thunkAPI) {    
     try {
         const res = await axios
-            .get("http://localhost/scandireact/php/productsdatabase.php");           
-        // console.log(res);
+            .get("http://localhost/scandireact/php/productsdatabase.php");       
         return res.data;    
     } catch (error) {
         console.log(error.message);
@@ -15,15 +12,25 @@ async function getProducts(_, thunkAPI) {
     }
 }
 
-async function deleteProducts(productsToDelete, thunkAPI) { 
-    console.log("delete");
-    // const productsToDelete =useSelector(selectSelected);
-    console.log(productsToDelete);
+async function deleteProducts(productsToDelete, thunkAPI) {     
     try {
         const res = await axios
             .post("http://localhost/scandireact/php/deleteProducts.php", { selected: productsToDelete });           
         console.log(res);
         return productsToDelete; 
+        
+    } catch (error) {
+        console.log(error.message);
+        return thunkAPI.rejectWithValue(error.message);        
+    }
+}
+
+async function addProduct (product, thunkAPI) {     
+    try {
+        const res = await axios
+            .post("http://localhost/scandireact/php/addProduct.php", product);           
+        console.log(res.data);
+        return res.data; 
         
     } catch (error) {
         console.log(error.message);
@@ -39,4 +46,9 @@ export const getAllProducts = createAsyncThunk(
 export const deleteSelected = createAsyncThunk(
   'changeProducts/deleteSelected',
   deleteProducts
+);
+
+export const addNewProduct = createAsyncThunk(
+  'changeProducts/addProduct',
+  addProduct
 );

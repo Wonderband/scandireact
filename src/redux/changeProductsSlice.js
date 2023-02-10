@@ -36,16 +36,12 @@ const changeProductsSlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder
-      .addCase(getAllProducts.fulfilled, (state, { payload }) => {
-        // console.log(payload);
+      .addCase(getAllProducts.fulfilled, (state, { payload }) => {       
         state.products = payload;
       })
       .addCase(deleteSelected.fulfilled, (state, { payload }) => {
         if (!payload.length) return;
-        state.products = state.products.filter(product => ! payload.includes(product.sku))
-
-        // console.log(payload);
-        
+        state.products = state.products.filter(product => !payload.includes(product.sku))        
       });
     //   .addCase(createTransaction.fulfilled, (state, { payload }) => {
     //     toastAddTransactionSuccess('Success adding transaction!');

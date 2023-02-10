@@ -1,9 +1,9 @@
-import axios from "axios";
-import { createRef, useEffect, useRef, useState } from "react";
+import { createRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteSelected, getAllProducts } from "../../redux/operations";
-import { selectProducts, selectSelected } from "../../redux/selectors";
+import { selectProducts } from "../../redux/selectors";
 import { ProductCard } from "../ProductCard/ProductCard";
+import { Link } from "react-router-dom";
 
 export const Home = () => {
   const dispatch = useDispatch();
@@ -14,15 +14,11 @@ export const Home = () => {
   const products = useSelector(selectProducts);
   const checkboxes = products.map((product) => createRef());
 
-  const handleAddProduct = () => {
-    console.log("clicked!");
-  };
-
   const submitHandle = (e) => {
     e.preventDefault();
     console.log(checkboxes);
     const selectedSkus = products
-      .filter((product, i) => checkboxes[i].current.checked)
+      .filter((_, i) => checkboxes[i].current.checked)
       .map((product) => product.sku);
     console.log(selectedSkus);
     dispatch(deleteSelected(selectedSkus));
@@ -44,10 +40,10 @@ export const Home = () => {
           })}
         </ul>
         <button type="submit">MASS DELETE</button>
-        <button type="button" onClick={handleAddProduct}>
-          ADD PRODUCT
-        </button>
       </form>
+      <Link to="/add-product">
+        <button type="button">ADD PRODUCT</button>
+      </Link>
     </div>
   );
 };
