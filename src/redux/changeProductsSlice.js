@@ -1,5 +1,5 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
-import { deleteSelected, getAllProducts } from "./operations";
+import { addNewProduct, deleteSelected, getAllProducts } from "./operations";
 // import {
 //   toastAddTransactionError,
 //   toastAddTransactionSuccess,
@@ -42,6 +42,11 @@ const changeProductsSlice = createSlice({
       .addCase(deleteSelected.fulfilled, (state, { payload }) => {
         if (!payload.length) return;
         state.products = state.products.filter(product => !payload.includes(product.sku))        
+      })
+    .addCase(addNewProduct.fulfilled, (state, { payload }) => {
+     
+      console.log(payload);
+      state.products = [...state.products, payload];     
       });
     //   .addCase(createTransaction.fulfilled, (state, { payload }) => {
     //     toastAddTransactionSuccess('Success adding transaction!');

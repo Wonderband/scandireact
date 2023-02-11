@@ -30,7 +30,7 @@ export const AddProduct = () => {
     const field = e.target;
     const fieldName = field.name;
     const fieldValue = field.value;
-    console.log(fieldName);
+
     setFormData({ ...formData, [fieldName]: fieldValue });
     if (fieldName === "type")
       setFormData({
@@ -43,7 +43,7 @@ export const AddProduct = () => {
         length: "",
       });
 
-    console.log(formData);
+    // console.log(formData);
   };
   return (
     <form onSubmit={onSubmitHandle} onChange={onChangeHandle}>
