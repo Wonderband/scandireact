@@ -16,11 +16,9 @@ export const Home = () => {
 
   const submitHandle = (e) => {
     e.preventDefault();
-    console.log(checkboxes);
     const selectedSkus = products
       .filter((_, i) => checkboxes[i].current.checked)
       .map((product) => product.sku);
-    console.log(selectedSkus);
     dispatch(deleteSelected(selectedSkus));
   };
 

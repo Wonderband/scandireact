@@ -29,7 +29,7 @@ async function addProduct (product, thunkAPI) {
     try {
         const res = await axios
             .post("http://localhost/scandireact/php/addTest.php", product);           
-        console.log(res.data);
+        // console.log(res.data);
         return res.data; 
         
     } catch (error) {

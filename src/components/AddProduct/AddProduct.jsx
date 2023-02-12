@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { JointClass } from "../../classes/product";
 import { addNewProduct } from "../../redux/operations";
 
 export const AddProduct = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     sku: "",
     name: "",
@@ -24,6 +25,7 @@ export const AddProduct = () => {
     const newProduct = new JointClass(formData.type, formData);
     // console.log(newProduct);
     dispatch(addNewProduct(newProduct));
+    navigate("/", { replace: true });
   };
 
   const onChangeHandle = (e) => {

@@ -16,7 +16,7 @@ import { addNewProduct, deleteSelected, getAllProducts } from "./operations";
 
 const initialState = {
   products: [],
-  selected: [],
+  // selected: [],
 };
 
 // const options = [getCategories, createTransaction, getTransactions];
@@ -43,10 +43,10 @@ const changeProductsSlice = createSlice({
         if (!payload.length) return;
         state.products = state.products.filter(product => !payload.includes(product.sku))        
       })
-    .addCase(addNewProduct.fulfilled, (state, { payload }) => {
-     
+    .addCase(addNewProduct.fulfilled, (state, { payload }) => {     
       console.log(payload);
-      state.products = [...state.products, payload];     
+      state.products = [...state.products, payload]; 
+      
       });
     //   .addCase(createTransaction.fulfilled, (state, { payload }) => {
     //     toastAddTransactionSuccess('Success adding transaction!');
