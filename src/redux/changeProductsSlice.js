@@ -1,79 +1,46 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 import { addNewProduct, deleteSelected, getAllProducts } from "./operations";
-// import {
-//   toastAddTransactionError,
-//   toastAddTransactionSuccess,
-// } from 'components/Toast/Toast';
-// import {
-//   createTransaction,
-//   deleteTransaction,
-//   editTransaction,
-//   getCategories,
-//   getTransactions,
-// } from './financeOperations';
-
-///////////////// Slice data ///////////////
 
 const initialState = {
   products: [],
-  // selected: [],
+  pending: false,
 };
 
-// const options = [getCategories, createTransaction, getTransactions];
-// const getOption = status => options.map(option => option[status]);
+const options = [getAllProducts, deleteSelected, addNewProduct];
+const getOption = (status) => options.map((option) => option[status]);
 
-// const handlePending = state => {
-//   state.isError = false;
-// };
+const handlePending = (state) => {
+  state.pending = true;
+};
 
-// const handleRejected = (state, { payload }) => {
-//   state.isError = true;
-//   toastAddTransactionError('Error adding transaction!');
-// };
+const handleRejected = (state, { payload }) => {
+  state.pending = false;
+};
 
 const changeProductsSlice = createSlice({
   name: "changeProducts",
   initialState,
   extraReducers: (builder) => {
     builder
-      .addCase(getAllProducts.fulfilled, (state, { payload }) => {       
+      .addCase(getAllProducts.fulfilled, (state, { payload }) => {
         state.products = payload;
+        state.pending = false;
       })
       .addCase(deleteSelected.fulfilled, (state, { payload }) => {
+        state.pending = false;
         if (!payload.length) return;
-        state.products = state.products.filter(product => !payload.includes(product.sku))        
+        state.products = state.products.filter(
+          (product) => !payload.includes(product.sku)
+        );
       })
-    .addCase(addNewProduct.fulfilled, (state, { payload }) => {     
-      console.log(payload);
-      state.products = [...state.products, payload]; 
-      
-      });
-    //   .addCase(createTransaction.fulfilled, (state, { payload }) => {
-    //     toastAddTransactionSuccess('Success adding transaction!');
-    //     state.totalBalance = payload.balanceAfter;
-    //     state.transactions = [payload, ...state.transactions];
-    //   })
-    //   .addCase(getTransactions.fulfilled, (state, { payload }) => {
-    //     state.transactions = payload;
-    //   })
-    //   .addCase(createTransaction.rejected, (_, { payload }) => {
-    //     console.log('reject!');
-    //   })
-    //   .addCase(editTransaction.fulfilled, () => {
-    //     toastAddTransactionSuccess('Success editing transaction!');
-    //   })
-    //   .addCase(deleteTransaction.fulfilled, () => {
-    //     toastAddTransactionSuccess('Success deleting transaction!');
-    //   })
-    //   .addMatcher(isAnyOf(...getOption('pending')), handlePending)
-    //   .addMatcher(isAnyOf(...getOption('rejected')), handleRejected);
+      .addCase(addNewProduct.fulfilled, (state, { payload }) => {
+        state.products = [...state.products, payload];
+        state.pending = false;
+      })
+      .addMatcher(isAnyOf(...getOption("pending")), handlePending)
+      .addMatcher(isAnyOf(...getOption("rejected")), handleRejected);
   },
-  //   reducers: {
-  //     setBalance: (state, { payload }) => {
-  //       state.totalBalance = payload;
-  //     },
-  //   },
 });
 
 export const changeProductsReducer = changeProductsSlice.reducer;
-// export const { setBalance } = financeSlice.actions;
+

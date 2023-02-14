@@ -1,9 +1,11 @@
 import { createRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteSelected, getAllProducts } from "../../redux/operations";
-import { selectProducts } from "../../redux/selectors";
+import { selectPending, selectProducts } from "../../redux/selectors";
 import { ProductCard } from "../ProductCard/ProductCard";
 import { Link } from "react-router-dom";
+import { ThreeDots } from "react-loader-spinner";
+import { toast } from "react-toastify";
 
 export const Home = () => {
   const dispatch = useDispatch();
@@ -12,6 +14,7 @@ export const Home = () => {
   }, [dispatch]);
 
   const products = useSelector(selectProducts);
+  const pending = useSelector(selectPending);
   const checkboxes = products.map((product) => createRef());
 
   const submitHandle = (e) => {
@@ -19,12 +22,30 @@ export const Home = () => {
     const selectedSkus = products
       .filter((_, i) => checkboxes[i].current.checked)
       .map((product) => product.sku);
-    dispatch(deleteSelected(selectedSkus));
+    dispatch(deleteSelected(selectedSkus))
+      .unwrap()
+      .then(() => {
+        toast("Successfully deleted");
+      })
+      .catch((error) => {
+        toast(error);
+      });
   };
 
   return (
     <div>
-      I`m HOME PAGE
+      {pending && (
+        <ThreeDots
+          height="80"
+          width="80"
+          radius="9"
+          color="#4fa94d"
+          ariaLabel="three-dots-loading"
+          wrapperStyle={{}}
+          wrapperClassName=""
+          visible={true}
+        />
+      )}
       <form action="" onSubmit={submitHandle}>
         <ul>
           {products.map((product, i) => {

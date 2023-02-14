@@ -18,20 +18,18 @@ try {
     $stmt->execute();
     $count = $stmt->fetchColumn();
 
-    if ($count > 0) {
-        echo '<div>SKU already exists!</div>';
-    } else {
-        $fields = implode(', ', array_keys($postData));
-        $values = ':' . implode(', :', array_keys($postData));
-        $sql = "INSERT INTO products ($fields) VALUES ($values)";
-        $stmt = $conn->prepare($sql);
-        foreach ($postData as $key => $value) {
-            $stmt->bindValue(":$key", $value);
-        }
-
-        $stmt->execute();
-        echo json_encode($postData);
-    }
+    if ($count > 0)
+        throw new PDOException(' - SKU doubling!');
+    $fields = implode(', ', array_keys($postData));
+    $values = ':' . implode(', :', array_keys($postData));
+    $sql = "INSERT INTO products ($fields) VALUES ($values)";
+    $stmt = $conn->prepare($sql);
+    foreach ($postData as $key => $value)
+        $stmt->bindValue(":$key", $value);
+    $stmt->execute();
+    echo json_encode($postData);
 } catch (\PDOException $e) {
-    echo "Connection failed: " . $e->getMessage();
+    $errorMessage = $e->getMessage();
+    $response = array('error' => 'Add product failed' . $errorMessage);
+    echo json_encode($response);
 }

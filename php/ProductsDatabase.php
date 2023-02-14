@@ -35,7 +35,9 @@ function displayAllProducts($server = 'localhost', $user = 'id19542860_root')
         //     $product->outputAttributes();
         // }
     } catch (\PDOException $e) {
-        echo "Connection failed: " . $e->getMessage();
+        $errorMessage = $e->getMessage();
+        $response = array('error' => "Connection failed: " . $errorMessage);
+        echo json_encode($response);
     }
 };
 
