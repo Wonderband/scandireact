@@ -15,6 +15,7 @@ const handlePending = (state) => {
 
 const handleRejected = (state, { payload }) => {
   state.pending = false;
+  console.log(payload);
 };
 
 const changeProductsSlice = createSlice({

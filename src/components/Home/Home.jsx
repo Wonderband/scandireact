@@ -10,7 +10,10 @@ import { toast } from "react-toastify";
 export const Home = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAllProducts());
+    dispatch(getAllProducts())
+      .unwrap()
+      .then(() => {})
+      .catch((error) => toast(error));
   }, [dispatch]);
 
   const products = useSelector(selectProducts);
@@ -22,6 +25,10 @@ export const Home = () => {
     const selectedSkus = products
       .filter((_, i) => checkboxes[i].current.checked)
       .map((product) => product.sku);
+    if (!selectedSkus.length) {
+      toast("No products selected!");
+      return;
+    }
     dispatch(deleteSelected(selectedSkus))
       .unwrap()
       .then(() => {
@@ -47,17 +54,20 @@ export const Home = () => {
         />
       )}
       <form action="" onSubmit={submitHandle}>
-        <ul>
-          {products.map((product, i) => {
-            return (
-              <ProductCard
-                key={product.sku}
-                product={product}
-                checkbox={checkboxes[i]}
-              />
-            );
-          })}
-        </ul>
+        {products.length > 0 && (
+          <ul>
+            {products.map((product, i) => {
+              return (
+                <ProductCard
+                  key={product.sku}
+                  product={product}
+                  checkbox={checkboxes[i]}
+                />
+              );
+            })}
+          </ul>
+        )}
+        {!products.length && <div>Database is empty!</div>}
         <button type="submit">MASS DELETE</button>
       </form>
       <Link to="/add-product">
