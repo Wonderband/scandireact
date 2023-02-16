@@ -6,7 +6,7 @@ import { MdCheckCircle, MdError } from "react-icons/md";
 export default function Toast() {
   return (
     <ToastContainer
-      position="top-right"
+      position="top-center"
       autoClose={2000}
       transition={Slide}
       closeOnClick

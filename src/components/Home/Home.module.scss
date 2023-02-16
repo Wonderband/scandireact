@@ -1,0 +1,35 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 5px 15px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgb(230, 217, 217);
+}
+
+.title {
+    font-size: 24px;
+    @media screen and (min-width: 768px) {
+        font-size: 30px;
+    }           
+}
+
+.button {
+    padding: 8px 15px;
+    border: 1px solid grey;
+    border-radius: 5%;
+    margin-left: 10px;
+    background-color: rgb(230, 217, 217);
+    font-weight:700;
+
+    &:hover {
+       background-color: beige; 
+    }
+}
+.cardBoard {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 10px;
+}
+

@@ -1,14 +1,14 @@
+import css from "./ProductCard.module.scss";
 export const ProductCard = ({ product, checkbox }) => {
-  // console.log(product);
   return (
-    <li>
-      <div style={{ outline: "1px solid red" }}>
-        <input
-          type="checkbox"
-          className="deleteCheckbox"
-          id={product.sku}
-          ref={checkbox}
-        />
+    <li className={css.card}>
+      <input
+        type="checkbox"
+        className="deleteCheckbox"
+        id={product.sku}
+        ref={checkbox}
+      />
+      <div className={css.info}>
         <p>Name: {product.name}</p>
         <p>SKU: {product.sku}</p>
         <p>Price: {product.price}</p>

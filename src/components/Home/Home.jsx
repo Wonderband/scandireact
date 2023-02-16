@@ -5,8 +5,8 @@ import { selectPending, selectProducts } from "../../redux/selectors";
 import { ProductCard } from "../ProductCard/ProductCard";
 import { Link } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
-import { toast } from "react-toastify";
 import { toastError, toastSuccess } from "../Toast/Toast";
+import css from "./Home.module.scss";
 
 export const Home = () => {
   const dispatch = useDispatch();
@@ -42,6 +42,19 @@ export const Home = () => {
 
   return (
     <div>
+      <header className={css.header}>
+        <h1 className={css.title}>Product List</h1>
+        <div>
+          <button type="submit" className={css.button} form="products">
+            MASS DELETE
+          </button>
+          <Link to="/add-product">
+            <button type="button" className={css.button}>
+              ADD PRODUCT
+            </button>
+          </Link>
+        </div>
+      </header>
       {pending && (
         <ThreeDots
           height="80"
@@ -54,26 +67,23 @@ export const Home = () => {
           visible={true}
         />
       )}
-      <form action="" onSubmit={submitHandle}>
+      {!products.length && <div>Database is empty!</div>}
+      <form id="products" onSubmit={submitHandle}>
         {products.length > 0 && (
-          <ul>
+          <ul className={css.cardBoard}>
             {products.map((product, i) => {
               return (
                 <ProductCard
                   key={product.sku}
                   product={product}
+                  className={css.card}
                   checkbox={checkboxes[i]}
                 />
               );
             })}
           </ul>
         )}
-        {!products.length && <div>Database is empty!</div>}
-        <button type="submit">MASS DELETE</button>
       </form>
-      <Link to="/add-product">
-        <button type="button">ADD PRODUCT</button>
-      </Link>
     </div>
   );
 };

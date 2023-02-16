@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import { JointClass } from "../../classes/product";
 import { addNewProduct } from "../../redux/operations";
 import { selectPending } from "../../redux/selectors";
@@ -36,7 +35,7 @@ export const AddProduct = () => {
       });
   };
 
-  const onChangeHandle = (e, { values, setFieldValue }) => {
+  const onChangeHandle = (e, { values }) => {
     const field = e.target;
     const fieldName = field.name;
     const fieldValue = field.value;
@@ -77,8 +76,37 @@ export const AddProduct = () => {
       .max(16, "Name should be no longer than 16 characters")
       .required("Please, enter the name"),
     price: floatValidator,
-    type: yup.string().required("Please choose the type"),
-    // size: yup.number().required("No size!"),
+    type: yup
+      .string()
+      .oneOf(["DVD", "Book", "Furniture"])
+      .required("Please choose the type"),
+    size: yup.number().positive("Size must be greater than 0"),
+    // .when("type", {
+    //   is: "DVD",
+    //   then: yup.number().required("Size is required for DVD type"),
+    // }),
+    // weight: yup.number().when("type", {
+    //   is: (value) => value === "Book",
+    //   then: yup.number().required("Weight is required for Book type"),
+
+    // then: yup.number().required("Weight is required for Book type"),
+    // .positive("Weight must be greater than 0"),
+    // }),
+    // height: yup.number().when("type", {
+    //   is: "Furniture",
+    //   then: yup.number().required("Height is required for Furniture type"),
+    //   // .moreThan(0, "Height must be greater than 0"),
+    // }),
+    // width: yup.number().when("type", {
+    //   is: "Furniture",
+    //   then: yup.number().required("Width is required for Furniture type"),
+    //   // .moreThan(0, "Width must be greater than 0"),
+    // }),
+    // length: yup.number().when("type", {
+    //   is: "Furniture",
+    //   then: yup.number().required("Length is required for Furniture type"),
+    // .moreThan(0, "Length must be greater than 0"),
+    // }),
   });
   return (
     <Formik
