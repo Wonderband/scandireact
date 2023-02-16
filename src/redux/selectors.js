@@ -1,3 +1,3 @@
-export const selectProducts = state => state.changeProducts.products;
-export const selectPending = state => state.changeProducts.pending;
+export const selectProducts = state => state.products.products;
+export const selectPending = state => state.products.pending;
 

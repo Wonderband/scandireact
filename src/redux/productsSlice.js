@@ -15,11 +15,10 @@ const handlePending = (state) => {
 
 const handleRejected = (state, { payload }) => {
   state.pending = false;
-  console.log(payload);
 };
 
-const changeProductsSlice = createSlice({
-  name: "changeProducts",
+const productsSlice = createSlice({
+  name: "products",
   initialState,
   extraReducers: (builder) => {
     builder
@@ -28,11 +27,10 @@ const changeProductsSlice = createSlice({
         state.pending = false;
       })
       .addCase(deleteSelected.fulfilled, (state, { payload }) => {
-        state.pending = false;
-        if (!payload.length) return;
         state.products = state.products.filter(
           (product) => !payload.includes(product.sku)
         );
+        state.pending = false;
       })
       .addCase(addNewProduct.fulfilled, (state, { payload }) => {
         state.products = [...state.products, payload];
@@ -43,5 +41,4 @@ const changeProductsSlice = createSlice({
   },
 });
 
-export const changeProductsReducer = changeProductsSlice.reducer;
-
+export const productsReducer = productsSlice.reducer;

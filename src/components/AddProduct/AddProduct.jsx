@@ -8,10 +8,7 @@ import { JointClass } from "../../classes/product";
 import { addNewProduct } from "../../redux/operations";
 import { selectPending } from "../../redux/selectors";
 import * as yup from "yup";
-// import {
-//   toastAddProductError,
-//   toastAddProductSuccess,
-// } from "components/Toast/Toast";
+import { toastError, toastSuccess } from "../Toast/Toast";
 
 export const AddProduct = () => {
   const dispatch = useDispatch();
@@ -31,11 +28,11 @@ export const AddProduct = () => {
     dispatch(addNewProduct(newProduct))
       .unwrap()
       .then(() => {
-        toast(`Product ${newProduct.name} added successfully!`);
+        toastSuccess(`Product ${newProduct.name} added successfully!`);
         setShouldRedirect(true);
       })
       .catch((error) => {
-        toast(error);
+        toastError(error);
       });
   };
 

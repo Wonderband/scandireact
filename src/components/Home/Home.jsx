@@ -6,6 +6,7 @@ import { ProductCard } from "../ProductCard/ProductCard";
 import { Link } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
 import { toast } from "react-toastify";
+import { toastError, toastSuccess } from "../Toast/Toast";
 
 export const Home = () => {
   const dispatch = useDispatch();
@@ -13,7 +14,7 @@ export const Home = () => {
     dispatch(getAllProducts())
       .unwrap()
       .then(() => {})
-      .catch((error) => toast(error));
+      .catch((error) => toastError(error));
   }, [dispatch]);
 
   const products = useSelector(selectProducts);
@@ -26,16 +27,16 @@ export const Home = () => {
       .filter((_, i) => checkboxes[i].current.checked)
       .map((product) => product.sku);
     if (!selectedSkus.length) {
-      toast("No products selected!");
+      toastError("No products selected!");
       return;
     }
     dispatch(deleteSelected(selectedSkus))
       .unwrap()
       .then(() => {
-        toast("Successfully deleted");
+        toastSuccess("Successfully deleted");
       })
       .catch((error) => {
-        toast(error);
+        toastError(error);
       });
   };
 
