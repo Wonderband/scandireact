@@ -1,15 +1,66 @@
+:global(.DVD) {
+    background-color: rgb(178, 243, 178);
+}
+
+:global(.Book) {
+    background-color: rgb(245, 245, 161);
+}
+
+ :global(.Furniture) {
+     background-color: rgb(148, 148, 236);
+ }
+
 .card {
     width: 350px;
     border: 1px solid grey;
     padding: 5px;
-    // display: flex;
-    // flex-direction: column;
-    // align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    justify-content: flex-start;
+    gap: 10px;
+    transform: translate();
+
+    transition-property: font-size, transform;
+        transition-duration: 300ms;
+        transition-timing-function: linear;
+        transition-delay: 0;
+
+   &:hover {
+    font-size: 1.2em;
+   }
+
+
+   
 }
+
+
 
 .info {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: baseline;
+    // justify-content:flex-start;
     gap: 5px;
+    // padding-left: 60px;
+    margin: 0 auto;
+    padding-bottom: 10px;
+}
+
+.mainInfo {
+    margin-bottom: 10px;
+    line-height: 1.3em;
+
+    & span {
+        font-weight: bold;        
+    }
+}
+
+.details {
+    font-size: 12px;
+    line-height: 1.5em;
+
+& span {
+        font-weight: bold;
+    }
 }

@@ -44,6 +44,18 @@ export const Home = () => {
     <div>
       <header className={css.header}>
         <h1 className={css.title}>Product List</h1>
+        {pending && (
+          <ThreeDots
+            height="80"
+            width="80"
+            radius="9"
+            color="#4fa94d"
+            ariaLabel="three-dots-loading"
+            wrapperStyle={{}}
+            wrapperClassName=""
+            visible={true}
+          />
+        )}
         <div>
           <button type="submit" className={css.button} form="products">
             MASS DELETE
@@ -55,18 +67,7 @@ export const Home = () => {
           </Link>
         </div>
       </header>
-      {pending && (
-        <ThreeDots
-          height="80"
-          width="80"
-          radius="9"
-          color="#4fa94d"
-          ariaLabel="three-dots-loading"
-          wrapperStyle={{}}
-          wrapperClassName=""
-          visible={true}
-        />
-      )}
+
       {!products.length && <div>Database is empty!</div>}
       <form id="products" onSubmit={submitHandle}>
         {products.length > 0 && (

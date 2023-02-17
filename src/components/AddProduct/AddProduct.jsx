@@ -8,6 +8,7 @@ import { addNewProduct } from "../../redux/operations";
 import { selectPending } from "../../redux/selectors";
 import * as yup from "yup";
 import { toastError, toastSuccess } from "../Toast/Toast";
+import css from "./AddProduct.module.scss";
 
 export const AddProduct = () => {
   const dispatch = useDispatch();
@@ -109,159 +110,191 @@ export const AddProduct = () => {
     // }),
   });
   return (
-    <Formik
-      initialValues={{
-        sku: "",
-        name: "",
-        price: "",
-        type: "",
-        size: "",
-        weight: "",
-        height: "",
-        width: "",
-        length: "",
-      }}
-      onSubmit={onSubmitHandle}
-      validationSchema={validation}
-    >
-      {(values) => {
-        return (
-          <Form onChange={(e) => onChangeHandle(e, values)}>
-            <button type="submit">SAVE</button>
-            <Link to="/">
-              <button type="button">CANCEL</button>
-            </Link>
-            <br />
-            <label>
-              SKU
-              <Field name="sku" type="text" value={values.sku} />
-            </label>
-            <ErrorMessage
-              name="sku"
-              component="span"
-              // className={styles.errorMessage}
-            />
-            <label>
-              NAME
-              <Field name="name" type="text" value={values.name} />
-            </label>
-            <ErrorMessage
-              name="name"
-              component="span"
-              // className={styles.errorMessage}
-            />
-            <label>
-              PRICE
-              <Field
-                name="price"
-                type="number"
-                step="0.01"
-                placeholder="0.00"
-                value={values.price}
-              />
-            </label>
-            <ErrorMessage
-              name="price"
-              component="span"
-              // className={styles.errorMessage}
-            />
-            <br />
+    <div className={css.modalBackdrop}>
+      {/* <div className={css.modalForm}> */}
 
-            <label>
-              Type switcher
-              <Field as="select" name="type" value={values.type} required>
-                <option hidden>Select the option</option>
-                <option value="DVD">DVD</option>
-                <option value="Book">Book</option>
-                <option value="Furniture">Furniture</option>
-              </Field>
-              <ErrorMessage
-                name="type"
-                component="span"
-                // className={styles.errorMessage}
-              />
-              <br />
-            </label>
-            {typeValue === "DVD" && (
-              <label>
-                Size (MB)
-                <Field
-                  type="number"
-                  name="size"
-                  value={values.size}
-                  min={1}
-                  max={1000000}
-                  required
+      <Formik
+        initialValues={{
+          sku: "",
+          name: "",
+          price: "",
+          type: "",
+          size: "",
+          weight: "",
+          height: "",
+          width: "",
+          length: "",
+        }}
+        onSubmit={onSubmitHandle}
+        validationSchema={validation}
+      >
+        {(values) => {
+          return (
+            <Form
+              onChange={(e) => onChangeHandle(e, values)}
+              className={css.modalForm}
+            >
+              <h1 className={css.formTitle}>Please, add your product</h1>
+              <div className={css.fields}>
+                <label className={css.formField}>
+                  <span>SKU:</span>
+                  <Field
+                    name="sku"
+                    type="text"
+                    value={values.sku}
+                    placeholder="Input unique SKU"
+                  />
+                  <ErrorMessage
+                    name="sku"
+                    component="span"
+                    className={css.errorMessage}
+                  />
+                </label>
+
+                <label className={css.formField}>
+                  NAME:
+                  <Field
+                    name="name"
+                    type="text"
+                    value={values.name}
+                    placeholder="Input the name"
+                  />
+                  <ErrorMessage
+                    name="name"
+                    component="span"
+                    className={css.errorMessage}
+                  />
+                </label>
+
+                <label className={css.formField}>
+                  PRICE:
+                  <Field
+                    name="price"
+                    type="number"
+                    step="0.01"
+                    placeholder="0.00"
+                    value={values.price}
+                  />
+                  <ErrorMessage
+                    name="price"
+                    component="span"
+                    className={css.errorMessage}
+                  />
+                </label>
+
+                <label className={css.formField}>
+                  Type switcher:
+                  <Field as="select" name="type" value={values.type} required>
+                    <option hidden>Select the option</option>
+                    <option value="DVD">DVD</option>
+                    <option value="Book">Book</option>
+                    <option value="Furniture">Furniture</option>
+                  </Field>
+                  <ErrorMessage
+                    name="type"
+                    component="span"
+                    className={css.errorMessage}
+                  />
+                </label>
+
+                {typeValue === "DVD" && (
+                  <label className={css.formField}>
+                    Size (MB):
+                    <Field
+                      type="number"
+                      name="size"
+                      value={values.size}
+                      min={1}
+                      max={1000000}
+                      required
+                      placeholder="0"
+                    />
+                  </label>
+                )}
+                {typeValue === "Book" && (
+                  <label className={css.formField}>
+                    Weight (KG):
+                    <Field
+                      type="number"
+                      name="weight"
+                      step="0.001"
+                      placeholder="0.000"
+                      min={0.001}
+                      max={1000000}
+                      value={values.weight}
+                      required
+                    />
+                  </label>
+                )}
+                {typeValue === "Furniture" && (
+                  <>
+                    <label className={css.formField}>
+                      Height (CM):
+                      <Field
+                        type="number"
+                        name="height"
+                        min={1}
+                        max={1000000}
+                        value={values.height}
+                        required
+                        placeholder="0"
+                      />
+                    </label>
+                    <label className={css.formField}>
+                      Width (CM):
+                      <Field
+                        type="number"
+                        name="width"
+                        min={1}
+                        max={1000000}
+                        value={values.width}
+                        required
+                        placeholder="0"
+                      />
+                    </label>
+                    <label className={css.formField}>
+                      Length (CM):
+                      <Field
+                        type="number"
+                        name="length"
+                        min={1}
+                        max={1000000}
+                        value={values.length}
+                        required
+                        placeholder="0"
+                      />
+                    </label>
+                  </>
+                )}
+              </div>
+
+              <div className={css.buttons}>
+                <button type="submit" className={css.button}>
+                  SAVE
+                </button>
+                <Link to="/">
+                  <button type="button" className={css.button}>
+                    CANCEL
+                  </button>
+                </Link>
+              </div>
+              {pending && (
+                <ThreeDots
+                  height="80"
+                  width="80"
+                  radius="9"
+                  color="#4fa94d"
+                  ariaLabel="three-dots-loading"
+                  wrapperStyle={{}}
+                  wrapperClassName=""
+                  visible={true}
                 />
-              </label>
-            )}
-            {typeValue === "Book" && (
-              <label>
-                Weight (KG)
-                <Field
-                  type="number"
-                  name="weight"
-                  step="0.001"
-                  placeholder="0.000"
-                  min={0.001}
-                  max={1000000}
-                  value={values.weight}
-                  required
-                />
-              </label>
-            )}
-            {typeValue === "Furniture" && (
-              <>
-                <label>
-                  Height (CM)
-                  <Field
-                    type="number"
-                    name="height"
-                    min={1}
-                    max={1000000}
-                    value={values.height}
-                    required
-                  />
-                </label>
-                <label>
-                  Width (CM)
-                  <Field
-                    type="number"
-                    name="width"
-                    min={1}
-                    max={1000000}
-                    value={values.width}
-                    required
-                  />
-                </label>
-                <label>
-                  Length (CM)
-                  <Field
-                    type="number"
-                    name="length"
-                    min={1}
-                    max={1000000}
-                    value={values.length}
-                    required
-                  />
-                </label>
-              </>
-            )}
-            {pending && (
-              <ThreeDots
-                height="80"
-                width="80"
-                radius="9"
-                color="#4fa94d"
-                ariaLabel="three-dots-loading"
-                wrapperStyle={{}}
-                wrapperClassName=""
-                visible={true}
-              />
-            )}
-          </Form>
-        );
-      }}
-    </Formik>
+              )}
+            </Form>
+          );
+        }}
+      </Formik>
+    </div>
+    // </div>
   );
 };

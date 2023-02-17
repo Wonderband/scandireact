@@ -37,8 +37,9 @@
   }
 } */
 
-.App {
+.App { 
   outline: 1px solid blue;
   margin: 0 auto;
-  padding: 5px 10px;
+  height: 100vh;
+  /* padding: 5px 10px; */
 }
