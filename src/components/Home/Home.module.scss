@@ -29,15 +29,22 @@
 .cardBoard {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;   
-    align-items: center;
+    flex-wrap: wrap;  
+align-items: center;
     gap: 20px;
     padding: 10px;
     margin: 0 auto;
-
+    
     @media screen and (min-width: 768px) {
             flex-direction: row;
-            align-items:stretch;           
+            align-items:stretch;
         }
+}
+
+.footer {
+    text-align: center;
+    border-top: 1px solid rgb(230, 217, 217);
+    margin-top: 20px;
+    padding: 10px;
 }
 

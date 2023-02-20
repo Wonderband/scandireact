@@ -85,6 +85,7 @@ export const Home = () => {
           </ul>
         )}
       </form>
+      <footer className={css.footer}>Scandiweb!!!</footer>
     </div>
   );
 };
