@@ -57,7 +57,7 @@ export const AddProduct = () => {
     .positive()
     .test(
       "is-decimal",
-      "The amount should be a decimal with maximum two digits after comma",
+      "Should be decimal with max 2 digits after comma",
       (val) => {
         if (val !== undefined) {
           return patternTwoDigisAfterComma.test(val);
@@ -278,7 +278,7 @@ export const AddProduct = () => {
                   </button>
                 </Link>
               </div>
-              {pending && (
+              {/* {pending && (
                 <ThreeDots
                   height="80"
                   width="80"
@@ -289,7 +289,7 @@ export const AddProduct = () => {
                   wrapperClassName=""
                   visible={true}
                 />
-              )}
+              )} */}
             </Form>
           );
         }}

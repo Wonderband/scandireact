@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteSelected, getAllProducts } from "../../redux/operations";
 import { selectPending, selectProducts } from "../../redux/selectors";
 import { ProductCard } from "../ProductCard/ProductCard";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
 import { toastError, toastSuccess } from "../Toast/Toast";
 import css from "./Home.module.scss";
@@ -41,12 +41,12 @@ export const Home = () => {
   };
 
   return (
-    <div>
+    <div className={css.homeContainer}>
       <header className={css.header}>
         <h1 className={css.title}>Product List</h1>
         {pending && (
           <ThreeDots
-            height="80"
+            height="30"
             width="80"
             radius="9"
             color="#4fa94d"
@@ -69,7 +69,7 @@ export const Home = () => {
       </header>
 
       {!products.length && <div>Database is empty!</div>}
-      <form id="products" onSubmit={submitHandle}>
+      <form id="products" onSubmit={submitHandle} className={css.form}>
         {products.length > 0 && (
           <ul className={css.cardBoard}>
             {products.map((product, i) => {
@@ -85,7 +85,8 @@ export const Home = () => {
           </ul>
         )}
       </form>
-      <footer className={css.footer}>Scandiweb!!!</footer>
+      <footer className={css.footer}>Scandiweb test assignment - 2023</footer>
+      <Outlet />
     </div>
   );
 };
