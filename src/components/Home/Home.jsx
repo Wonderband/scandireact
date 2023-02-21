@@ -49,14 +49,14 @@ export const Home = () => {
             height="30"
             width="80"
             radius="9"
-            color="#4fa94d"
+            color="#000000"
             ariaLabel="three-dots-loading"
             wrapperStyle={{}}
             wrapperClassName=""
             visible={true}
           />
         )}
-        <div>
+        <div className={css.actions}>
           <button type="submit" className={css.button} form="products">
             MASS DELETE
           </button>
@@ -68,7 +68,7 @@ export const Home = () => {
         </div>
       </header>
 
-      {!products.length && <div>Database is empty!</div>}
+      {!products.length && <div className={css.nodata}>Database is empty!</div>}
       <form id="products" onSubmit={submitHandle} className={css.form}>
         {products.length > 0 && (
           <ul className={css.cardBoard}>
@@ -85,7 +85,10 @@ export const Home = () => {
           </ul>
         )}
       </form>
-      <footer className={css.footer}>Scandiweb test assignment - 2023</footer>
+      <footer className={css.footer}>
+        <p>Scandiweb test assignment </p>
+        <p>Alex Koniushenko - 2023</p>
+      </footer>
       <Outlet />
     </div>
   );

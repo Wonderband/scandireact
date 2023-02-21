@@ -139,6 +139,7 @@ export const AddProduct = () => {
                 <label className={css.formField}>
                   <span>SKU:</span>
                   <Field
+                    className={css.fieldValue}
                     name="sku"
                     type="text"
                     value={values.sku}
@@ -154,6 +155,7 @@ export const AddProduct = () => {
                 <label className={css.formField}>
                   NAME:
                   <Field
+                    className={css.fieldValue}
                     name="name"
                     type="text"
                     value={values.name}
@@ -169,6 +171,7 @@ export const AddProduct = () => {
                 <label className={css.formField}>
                   PRICE:
                   <Field
+                    className={css.fieldValue}
                     name="price"
                     type="number"
                     step="0.01"
@@ -184,7 +187,13 @@ export const AddProduct = () => {
 
                 <label className={css.formField}>
                   Type switcher:
-                  <Field as="select" name="type" value={values.type} required>
+                  <Field
+                    as="select"
+                    name="type"
+                    value={values.type}
+                    className={css.fieldValue}
+                    required
+                  >
                     <option hidden>Select the option</option>
                     <option value="DVD">DVD</option>
                     <option value="Book">Book</option>
@@ -208,6 +217,7 @@ export const AddProduct = () => {
                       max={1000000}
                       required
                       placeholder="0"
+                      className={css.fieldValue}
                     />
                   </label>
                 )}
@@ -223,6 +233,7 @@ export const AddProduct = () => {
                       max={1000000}
                       value={values.weight}
                       required
+                      className={css.fieldValue}
                     />
                   </label>
                 )}
@@ -238,6 +249,7 @@ export const AddProduct = () => {
                         value={values.height}
                         required
                         placeholder="0"
+                        className={css.fieldValue}
                       />
                     </label>
                     <label className={css.formField}>
@@ -250,6 +262,7 @@ export const AddProduct = () => {
                         value={values.width}
                         required
                         placeholder="0"
+                        className={css.fieldValue}
                       />
                     </label>
                     <label className={css.formField}>
@@ -262,6 +275,7 @@ export const AddProduct = () => {
                         value={values.length}
                         required
                         placeholder="0"
+                        className={css.fieldValue}
                       />
                     </label>
                   </>
