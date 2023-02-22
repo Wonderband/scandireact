@@ -20,6 +20,24 @@ export const AddProduct = () => {
     }
   }, [shouldRedirect, navigate]);
 
+  useEffect(() => {
+    const onEscapeHandler = (e) => {
+      if (e.code === "Escape") {
+        navigate("/", { replace: true });
+      }
+    };
+    document.addEventListener("keydown", onEscapeHandler);
+    return () => {
+      document.removeEventListener("keydown", onEscapeHandler);
+    };
+  }, [navigate]);
+
+  const clickOnBackdropHandler = (e) => {
+    if (e.target === e.currentTarget) {
+      navigate("/", { replace: true });
+    }
+  };
+
   const onSubmitHandle = (values) => {
     const newProduct = new JointClass(values.type, values);
     dispatch(addNewProduct(newProduct))
@@ -78,10 +96,13 @@ export const AddProduct = () => {
       .string()
       .oneOf(["DVD", "Book", "Furniture"])
       .required("Please choose the type"),
-    size: yup.number().positive("Size must be greater than 0"),
-    // .when("type", {
-    //   is: "DVD",
-    //   then: yup.number().required("Size is required for DVD type"),
+    // size: yup.number().when("type", {
+    //   is: (type) => type === "DVD",
+    //   then: yup
+    //     .number()
+    //     .positive("Size must be greater than 0")
+    //     .required("Size is required for DVD type"),
+    //   otherwise: yup.number().notRequired(),
     // }),
     // weight: yup.number().when("type", {
     //   is: (value) => value === "Book",
@@ -107,7 +128,7 @@ export const AddProduct = () => {
     // }),
   });
   return (
-    <div className={css.modalBackdrop}>
+    <div className={css.modalBackdrop} onClick={clickOnBackdropHandler}>
       {/* <div className={css.modalForm}> */}
 
       <Formik
