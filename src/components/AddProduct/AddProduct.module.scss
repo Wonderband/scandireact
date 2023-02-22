@@ -42,6 +42,7 @@
   position: relative;
   display: flex;
   justify-content: space-between;
+  align-items:baseline;
   width: 100%;
   font-size: 14px ;
   @media screen and (min-width: 650px) {
@@ -62,8 +63,13 @@
   position: absolute;
   top: 22px;
   color: red;
-  font-size: 12px;
+  font-size: 10px;
   margin: 0 auto;
+  @media screen and (min-width: 650px) {
+      font-size: 12px;
+      top: 30px;
+      
+    }
 }
 
 .fields {
@@ -97,6 +103,22 @@
        font-size: 18px; 
       padding: 8px 25px;
      }
+}
+
+.close {
+  cursor: pointer;
+  display: none;
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  width: 19px;
+  height: 19px;
+  background-image: url('../../assets/close.svg');
+  background-repeat: no-repeat;
+
+  @media screen and (min-width: 650px) {
+    display: block;
+  }
 }
 
 

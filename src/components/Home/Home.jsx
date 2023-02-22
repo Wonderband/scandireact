@@ -19,7 +19,8 @@ export const Home = () => {
 
   const products = useSelector(selectProducts);
   const pending = useSelector(selectPending);
-  const checkboxes = products.map((product) => createRef());
+  const checkboxes =
+    products.length > 0 ? products.map((product) => createRef()) : [];
 
   const submitHandle = (e) => {
     e.preventDefault();

@@ -4,7 +4,10 @@ import axios from "axios";
 async function getProducts(_, thunkAPI) {    
     try {
         const res = await axios
-            .get("http://localhost/scandireact/src/php/showProducts.php");       
+            .get("http://localhost/scandireact/src/php/showProducts.php"); 
+        if (res.data.error) {
+            return thunkAPI.rejectWithValue(res.data.error);
+        }
         return res.data;    
     } catch (error) {       
         return thunkAPI.rejectWithValue(error.message);        

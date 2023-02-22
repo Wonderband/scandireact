@@ -1,11 +1,9 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useEffect, useState } from "react";
-import { ThreeDots } from "react-loader-spinner";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { JointClass } from "../../classes/product";
 import { addNewProduct } from "../../redux/operations";
-import { selectPending } from "../../redux/selectors";
 import * as yup from "yup";
 import { toastError, toastSuccess } from "../Toast/Toast";
 import css from "./AddProduct.module.scss";
@@ -15,7 +13,6 @@ export const AddProduct = () => {
   const navigate = useNavigate();
   const [typeValue, setTypeValue] = useState("");
   const [shouldRedirect, setShouldRedirect] = useState(false);
-  const pending = useSelector(selectPending);
 
   useEffect(() => {
     if (shouldRedirect) {
@@ -135,6 +132,14 @@ export const AddProduct = () => {
               className={css.modalForm}
             >
               <h1 className={css.formTitle}>Please, add your product</h1>
+              <Link to="/">
+                <span
+                  className={css.close}
+                  onClick={() => {
+                    <Navigate to="/" />;
+                  }}
+                ></span>
+              </Link>
               <div className={css.fields}>
                 <label className={css.formField}>
                   <span>SKU:</span>
@@ -292,18 +297,6 @@ export const AddProduct = () => {
                   </button>
                 </Link>
               </div>
-              {/* {pending && (
-                <ThreeDots
-                  height="80"
-                  width="80"
-                  radius="9"
-                  color="#4fa94d"
-                  ariaLabel="three-dots-loading"
-                  wrapperStyle={{}}
-                  wrapperClassName=""
-                  visible={true}
-                />
-              )} */}
             </Form>
           );
         }}

@@ -2,7 +2,7 @@ class Product {
     constructor({ sku, name, price, type }) { 
         this.sku = sku;
         this.name = name;
-        this.price = price;
+        this.price = price.toFixed(2);
         this.type = type;
     }
 }
@@ -17,7 +17,7 @@ export class DVD extends Product {
 export class Book extends Product { 
     constructor({ sku, name, price, type, weight }) { 
         super({ sku, name, price, type });
-        this.weight = weight;
+        this.weight = weight.toFixed(3);
     }
 }
 

@@ -1,7 +1,8 @@
 <?php
-header('Access-Control-Allow-Origin: http://localhost:3000');
+// header('Access-Control-Allow-Origin: http://localhost:3000');
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Allow-Headers: *");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 include './server.php';
 
 $postData = json_decode(file_get_contents("php://input"), true);
