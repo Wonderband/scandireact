@@ -58,7 +58,12 @@ export const Home = () => {
           />
         )}
         <div className={css.actions}>
-          <button type="submit" className={css.button} form="products">
+          <button
+            type="submit"
+            className={css.button}
+            form="products"
+            id="delete-product-btn"
+          >
             MASS DELETE
           </button>
           <Link to="/add-product">

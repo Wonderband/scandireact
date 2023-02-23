@@ -4,7 +4,7 @@ export const ProductCard = ({ product, checkbox }) => {
     <li className={`${css.card} ${product.type}`}>
       <input
         type="checkbox"
-        className="deleteCheckbox"
+        className="delete-checkbox"
         id={product.sku}
         ref={checkbox}
       />

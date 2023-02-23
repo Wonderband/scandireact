@@ -119,6 +119,7 @@ export const AddProduct = () => {
             <Form
               onChange={(e) => onChangeHandle(e, values)}
               className={css.modalForm}
+              id="product_form"
             >
               <h1 className={css.formTitle}>Please, add your product</h1>
               <Link to="/">
@@ -138,6 +139,7 @@ export const AddProduct = () => {
                     type="text"
                     value={values.sku}
                     placeholder="Input unique SKU"
+                    id="sku"
                   />
                   <ErrorMessage
                     name="sku"
@@ -154,6 +156,7 @@ export const AddProduct = () => {
                     type="text"
                     value={values.name}
                     placeholder="Input the name"
+                    id="name"
                   />
                   <ErrorMessage
                     name="name"
@@ -163,7 +166,7 @@ export const AddProduct = () => {
                 </label>
 
                 <label className={css.formField}>
-                  PRICE:
+                  PRICE: $
                   <Field
                     className={css.fieldValue}
                     name="price"
@@ -171,6 +174,7 @@ export const AddProduct = () => {
                     step="0.01"
                     placeholder="0.00"
                     value={values.price}
+                    id="price"
                   />
                   <ErrorMessage
                     name="price"
@@ -187,11 +191,18 @@ export const AddProduct = () => {
                     value={values.type}
                     className={css.fieldValue}
                     required
+                    id="productType"
                   >
                     <option hidden>Select the option</option>
-                    <option value="DVD">DVD</option>
-                    <option value="Book">Book</option>
-                    <option value="Furniture">Furniture</option>
+                    <option value="DVD" id="DVD">
+                      DVD
+                    </option>
+                    <option value="Book" id="Book">
+                      Book
+                    </option>
+                    <option value="Furniture" id="Furniture">
+                      Furniture
+                    </option>
                   </Field>
                   <ErrorMessage
                     name="type"
@@ -212,6 +223,7 @@ export const AddProduct = () => {
                       required
                       placeholder="0"
                       className={css.fieldValue}
+                      id="size"
                     />
                   </label>
                 )}
@@ -228,6 +240,7 @@ export const AddProduct = () => {
                       value={values.weight}
                       required
                       className={css.fieldValue}
+                      id="weight"
                     />
                   </label>
                 )}
@@ -244,6 +257,7 @@ export const AddProduct = () => {
                         required
                         placeholder="0"
                         className={css.fieldValue}
+                        id="height"
                       />
                     </label>
                     <label className={css.formField}>
@@ -257,6 +271,7 @@ export const AddProduct = () => {
                         required
                         placeholder="0"
                         className={css.fieldValue}
+                        id="width"
                       />
                     </label>
                     <label className={css.formField}>
@@ -270,6 +285,7 @@ export const AddProduct = () => {
                         required
                         placeholder="0"
                         className={css.fieldValue}
+                        id="length"
                       />
                     </label>
                   </>
@@ -277,11 +293,11 @@ export const AddProduct = () => {
               </div>
               <div className={css.buttons}>
                 <button type="submit" className={css.button}>
-                  SAVE
+                  Save
                 </button>
                 <Link to="/">
                   <button type="button" className={css.button}>
-                    CANCEL
+                    Cancel
                   </button>
                 </Link>
               </div>
