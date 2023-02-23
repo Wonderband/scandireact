@@ -1,7 +1,7 @@
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { Slide } from "react-toastify";
 import { MdCheckCircle, MdError } from "react-icons/md";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Toast() {
   return (

@@ -7,13 +7,13 @@ const initialState = {
 };
 
 const options = [getAllProducts, deleteSelected, addNewProduct];
-const getOption = (status) => options.map((option) => option[status]);
+const getOption = status => options.map((option) => option[status]);
 
 const handlePending = (state) => {
   state.pending = true;
 };
 
-const handleRejected = (state, { payload }) => {
+const handleRejected = (state) => {
   state.pending = false;
 };
 

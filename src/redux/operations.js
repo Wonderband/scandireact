@@ -21,9 +21,7 @@ async function deleteProducts(productsToDelete, thunkAPI) {
           if (res.data.error) {
             return thunkAPI.rejectWithValue(res.data.error);
         }
-        return productsToDelete; 
-        
-        
+        return productsToDelete;        
     } catch (error) {        
         return thunkAPI.rejectWithValue(error.message);        
     }
@@ -36,8 +34,7 @@ async function addProduct (product, thunkAPI) {
           if (res.data.error) {
             return thunkAPI.rejectWithValue(res.data.error);
         }
-        return res.data; 
-        
+        return res.data;         
     } catch (error) {        
         return thunkAPI.rejectWithValue(error.message);        
     }

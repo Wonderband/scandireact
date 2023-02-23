@@ -1,10 +1,10 @@
 import { createRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, Outlet } from "react-router-dom";
+import { ThreeDots } from "react-loader-spinner";
 import { deleteSelected, getAllProducts } from "../../redux/operations";
 import { selectPending, selectProducts } from "../../redux/selectors";
 import { ProductCard } from "../ProductCard/ProductCard";
-import { Link, Outlet } from "react-router-dom";
-import { ThreeDots } from "react-loader-spinner";
 import { toastError, toastSuccess } from "../Toast/Toast";
 import css from "./Home.module.scss";
 
@@ -68,7 +68,6 @@ export const Home = () => {
           </Link>
         </div>
       </header>
-
       {!products.length && <div className={css.nodata}>Database is empty!</div>}
       <form id="products" onSubmit={submitHandle} className={css.form}>
         {products.length > 0 && (

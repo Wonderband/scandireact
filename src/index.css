@@ -20,19 +20,6 @@ body {
   backdrop-filter: blur(25px);
 }
 
-/* @media screen and (min-width: 768px) {
-  body {
-    background: rgba(255, 255, 255, 0.4);
-  }
-} */
-
-@media screen and (max-width: 767px) {
-  body {
-    background: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(25px);
-  }
-}
-
 #root {
   height: 100%;
 }
@@ -87,4 +74,3 @@ button {
   background: none;
 }
 
-/* @import './components//Toast/Toast.module.scss'; */

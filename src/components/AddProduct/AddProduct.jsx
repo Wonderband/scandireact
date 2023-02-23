@@ -1,10 +1,10 @@
-import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import * as yup from "yup";
 import { JointClass } from "../../classes/product";
 import { addNewProduct } from "../../redux/operations";
-import * as yup from "yup";
 import { toastError, toastSuccess } from "../Toast/Toast";
 import css from "./AddProduct.module.scss";
 
@@ -26,6 +26,7 @@ export const AddProduct = () => {
         navigate("/", { replace: true });
       }
     };
+
     document.addEventListener("keydown", onEscapeHandler);
     return () => {
       document.removeEventListener("keydown", onEscapeHandler);
@@ -69,10 +70,9 @@ export const AddProduct = () => {
   let patternTwoDigisAfterComma = /^\d+(\.\d{0,2})?$/;
   const floatValidator = yup
     .number()
-    .positive()
     .test(
       "is-decimal",
-      "Should be decimal with max 2 digits after comma",
+      "Should be positive with max 2 digits after comma",
       (val) => {
         if (val !== undefined) {
           return patternTwoDigisAfterComma.test(val);
@@ -96,41 +96,9 @@ export const AddProduct = () => {
       .string()
       .oneOf(["DVD", "Book", "Furniture"])
       .required("Please choose the type"),
-    // size: yup.number().when("type", {
-    //   is: (type) => type === "DVD",
-    //   then: yup
-    //     .number()
-    //     .positive("Size must be greater than 0")
-    //     .required("Size is required for DVD type"),
-    //   otherwise: yup.number().notRequired(),
-    // }),
-    // weight: yup.number().when("type", {
-    //   is: (value) => value === "Book",
-    //   then: yup.number().required("Weight is required for Book type"),
-
-    // then: yup.number().required("Weight is required for Book type"),
-    // .positive("Weight must be greater than 0"),
-    // }),
-    // height: yup.number().when("type", {
-    //   is: "Furniture",
-    //   then: yup.number().required("Height is required for Furniture type"),
-    //   // .moreThan(0, "Height must be greater than 0"),
-    // }),
-    // width: yup.number().when("type", {
-    //   is: "Furniture",
-    //   then: yup.number().required("Width is required for Furniture type"),
-    //   // .moreThan(0, "Width must be greater than 0"),
-    // }),
-    // length: yup.number().when("type", {
-    //   is: "Furniture",
-    //   then: yup.number().required("Length is required for Furniture type"),
-    // .moreThan(0, "Length must be greater than 0"),
-    // }),
   });
   return (
     <div className={css.modalBackdrop} onClick={clickOnBackdropHandler}>
-      {/* <div className={css.modalForm}> */}
-
       <Formik
         initialValues={{
           sku: "",
@@ -307,7 +275,6 @@ export const AddProduct = () => {
                   </>
                 )}
               </div>
-
               <div className={css.buttons}>
                 <button type="submit" className={css.button}>
                   SAVE
@@ -323,6 +290,5 @@ export const AddProduct = () => {
         }}
       </Formik>
     </div>
-    // </div>
   );
 };
