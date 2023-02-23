@@ -4,7 +4,7 @@ import axios from "axios";
 async function getProducts(_, thunkAPI) {    
     try {
         const res = await axios
-            .get("http://localhost/scandireact/src/php/showProducts.php"); 
+            .get("./api/showProducts.php"); 
         if (res.data.error) {
             return thunkAPI.rejectWithValue(res.data.error);
         }
@@ -17,7 +17,7 @@ async function getProducts(_, thunkAPI) {
 async function deleteProducts(productsToDelete, thunkAPI) {     
     try {
        const res = await axios
-            .post("http://localhost/scandireact/src/php/deleteProducts.php", { selected: productsToDelete });        
+            .post("./api/deleteProducts.php", { selected: productsToDelete });        
           if (res.data.error) {
             return thunkAPI.rejectWithValue(res.data.error);
         }
@@ -30,7 +30,7 @@ async function deleteProducts(productsToDelete, thunkAPI) {
 async function addProduct (product, thunkAPI) {     
     try {
         const res = await axios
-            .post("http://localhost/scandireact/src/php/addProduct.php", product);       
+            .post("./api/addProduct.php", product);       
           if (res.data.error) {
             return thunkAPI.rejectWithValue(res.data.error);
         }

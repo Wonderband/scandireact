@@ -4,14 +4,9 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");
 // header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 $servername = 'localhost';
-$dbname = 'id19542860_testdb';
-$username = 'id19542860_root';
+$dbname = 'id20351802_newdb';
+$username = 'id20351802_user';
 $password = "X_Jr]@gBZxN74iA{";
-
-// $servername = 'localhost';
-// $dbname = 'id19626883_mydb';
-// $username = 'id19626883_user';
-// $password = "X_Jr]@gBZxN74iA{";
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
